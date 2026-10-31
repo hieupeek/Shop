@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import ImageUploader from '@/components/ImageUploader';
 import { PRODUCTS, CATEGORIES } from '@/data/mockData';
 import { Product } from '@/types';
 import { formatVND } from '@/lib/utils';
@@ -112,7 +113,7 @@ export default function AdminPage() {
   const [newProductGender, setNewProductGender] = useState<'MEN' | 'WOMEN'>('MEN');
   const [newProductPrice, setNewProductPrice] = useState('450000');
   const [newProductCategory, setNewProductCategory] = useState(CATEGORIES[0]?.name || 'Áo Polo Nam');
-  const [newProductImage, setNewProductImage] = useState('https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80');
+  const [newProductImage, setNewProductImage] = useState('');
 
   // Order Details Modal State
   const [selectedOrder, setSelectedOrder] = useState<MockOrder | null>(null);
@@ -154,7 +155,7 @@ export default function AdminPage() {
       basePrice: Number(newProductPrice) || 350000,
       originalPrice: (Number(newProductPrice) || 350000) * 1.25,
       description: 'Sản phẩm thời trang cao cấp với chất liệu thoáng mát và kiểu dáng hiện đại.',
-      images: [{ url: newProductImage, isPrimary: true }],
+      images: [{ url: newProductImage || 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80', isPrimary: true }],
       colors: [
         { name: 'Đen', hex: '#111111' },
         { name: 'Trắng', hex: '#ffffff' }
@@ -744,12 +745,12 @@ export default function AdminPage() {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-neutral-700 mb-1">Link ảnh sản phẩm:</label>
-                <input
-                  type="url"
+                <label className="block text-xs font-bold text-neutral-700 mb-1.5">
+                  Hình ảnh sản phẩm (Tải lên Cloud Storage):
+                </label>
+                <ImageUploader
                   value={newProductImage}
-                  onChange={(e) => setNewProductImage(e.target.value)}
-                  className="w-full text-xs p-2.5 border border-neutral-300 rounded-xl focus:border-black focus:outline-hidden"
+                  onChange={setNewProductImage}
                 />
               </div>
 
