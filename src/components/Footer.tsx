@@ -11,8 +11,7 @@ export default function Footer() {
           {/* COL 1: CONTACT & STORES (span 5) */}
           <div className="lg:col-span-5 space-y-3.5">
             <div className="flex items-baseline gap-1.5 mb-2">
-              <span className="text-2xl font-black tracking-tight text-white">BU</span>
-              <span className="text-xl font-bold tracking-wider text-[#e5677d]">BIGSIZE</span>
+              <span className="text-2xl font-black tracking-wider text-white">PLUX<span className="text-[#e5677d]">XL</span></span>
             </div>
 
             <div className="flex items-start gap-2 text-neutral-300 leading-relaxed">
@@ -121,7 +120,7 @@ export default function Footer() {
 
         {/* BOTTOM COPYRIGHT */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-neutral-500 gap-2">
-          <p>© Bản quyền thuộc về BU Bigsize | Cung cấp bởi BU Fashion Platform</p>
+          <p>© Bản quyền thuộc về PLUXXL | Cung cấp bởi PLUXXL Platform</p>
           <p>Thương hiệu thời trang nam & nữ ngoại cỡ hàng đầu</p>
         </div>
 

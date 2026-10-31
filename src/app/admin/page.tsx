@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -46,7 +46,7 @@ const INITIAL_ORDERS: MockOrder[] = [
     phone: '0988 123 456',
     address: '48A Dịch Vọng Hậu, Cầu Giấy, Hà Nội',
     items: [
-      { name: 'Áo Polo Nam Classic Phối Bo Cổ Co Giãn', size: 'L', color: 'Xanh Navy', qty: 2, price: 420000 }
+      { name: 'Áo Polo Phối Tay Raglan Xanh Rêu Phom Regular Bigsize', size: 'L', color: 'Xanh Navy', qty: 2, price: 420000 }
     ],
     totalAmount: 840000,
     paymentMethod: 'COD',
@@ -60,8 +60,8 @@ const INITIAL_ORDERS: MockOrder[] = [
     phone: '0912 888 999',
     address: '177 Quang Trung, Gò Vấp, TP.HCM',
     items: [
-      { name: 'Đầm Dáng Chữ A Xoắn Eo Thanh Lịch', size: 'M', color: 'Đỏ Rượu', qty: 1, price: 585000 },
-      { name: 'Áo Kiểu Nữ Cổ V Xếp Ly Ngực Tay Lỡ', size: 'M', color: 'Trắng Sữa', qty: 1, price: 395000 }
+      { name: 'Set Bộ Áo Cổ Sen Phối Chân Váy Xếp Ly Công Sở 24YBD53', size: 'M', color: 'Đỏ Rượu', qty: 1, price: 585000 },
+      { name: 'Áo Sơ Mi Nữ Kẻ Sọc Hồng Pastel Dáng Rộng 24YSM64', size: 'M', color: 'Trắng Sữa', qty: 1, price: 395000 }
     ],
     totalAmount: 980000,
     paymentMethod: 'VIETQR',
@@ -75,8 +75,8 @@ const INITIAL_ORDERS: MockOrder[] = [
     phone: '0977 456 789',
     address: '83 Nguyễn Hy Quang, Đống Đa, Hà Nội',
     items: [
-      { name: 'Quần Âu Nam Phom Slim-Fit Co Giãn', size: '31', color: 'Đen', qty: 1, price: 520000 },
-      { name: 'Áo Sơ Mi Dài Tay Nam Vải Sợi Tre Chống Nhăn', size: 'XL', color: 'Trắng', qty: 1, price: 480000 }
+      { name: 'Quần Jean Nam Ống Suông Co Giãn Cao Cấp Cạp Chun Ẩn', size: '31', color: 'Đen', qty: 1, price: 520000 },
+      { name: 'Áo Sơ Mi Nam Dài Tay Cao Cấp Vải Sợi Tre Chống Nhăn PLUXXL', size: 'XL', color: 'Trắng', qty: 1, price: 480000 }
     ],
     totalAmount: 1000000,
     paymentMethod: 'VIETQR',
@@ -90,7 +90,7 @@ const INITIAL_ORDERS: MockOrder[] = [
     phone: '0933 111 222',
     address: '24 Tuệ Tĩnh, Hai Bà Trưng, Hà Nội',
     items: [
-      { name: 'Set Bộ Áo Cổ Tim Phối Quần Suông Công Sở', size: 'L', color: 'Be', qty: 1, price: 650000 }
+      { name: 'Set Bộ Thể Thao Thun Nữ Bigsize Áo Phông Quần Suông', size: 'L', color: 'Be', qty: 1, price: 650000 }
     ],
     totalAmount: 650000,
     paymentMethod: 'COD',
@@ -197,7 +197,7 @@ export default function AdminPage() {
           <div className="flex items-center justify-between pb-6 border-b border-neutral-800">
             <div>
               <div className="flex items-baseline gap-1">
-                <span className="text-2xl font-black text-white">BU</span>
+                <span className="text-2xl font-black text-white">PLUX<span className="text-[#e5677d]">XL</span></span>
                 <span className="text-xl font-bold text-neutral-400">ADMIN</span>
               </div>
               <p className="text-[10px] text-neutral-500 uppercase tracking-widest mt-0.5">

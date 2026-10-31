@@ -3,9 +3,12 @@ export type Gender = 'MEN' | 'WOMEN' | 'UNISEX';
 export type Category = {
   id: string;
   name: string;
+  shortName?: string;
+  fullName?: string;
   slug: string;
   gender: Gender;
-  image: string;
+  image?: string;
+  icon?: string;
   itemCount: number;
 };
 
@@ -62,12 +65,11 @@ export type CartItem = {
 
 export type CustomerReview = {
   id: string;
-  author: string;
-  gender: Gender;
-  rating: number;
+  customerName: string;
+  avatar: string;
   productName: string;
+  rating: number;
   comment: string;
   date: string;
+  verified: boolean;
 };
-
-

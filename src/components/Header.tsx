@@ -46,12 +46,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
                 onClick={() => setActiveTab('ALL')}
                 className="flex items-baseline gap-1 group cursor-pointer"
               >
-                <span className="text-2xl sm:text-3xl font-black tracking-tight text-[#080808]">
-                  BU
-                </span>
-                <span className="text-xl sm:text-2xl font-bold tracking-wider text-neutral-700 group-hover:text-black transition-colors">
-                  FASHION
-                </span>
+                <span className="text-2xl sm:text-3xl font-black tracking-wider text-[#080808]">PLUX<span className="text-[#e5677d]">XL</span></span>
               </Link>
             </div>
 

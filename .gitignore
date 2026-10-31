@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # OS Files
 .DS_Store
+
+# Raw uploaded camera assets
+Camera Roll/

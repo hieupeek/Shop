@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Category } from '@/types';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { CategoryFashionIcon } from '@/components/FashionCategoryIcons';
 
 type SeasonCollectionProps = {
   categories: Category[];
@@ -69,47 +69,42 @@ export default function SeasonCollectionSection({
           </div>
         </div>
 
-        {/* CIRCULAR / CARD CATEGORY ROW (EXACT LIKE BUBIGSIZE SS_COLLECTION) */}
-        <div className="pt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 lg:gap-6">
+        {/* FASHION ICON CATEGORY CARDS (CHUẨN THEO ẢNH MẪU THAM KHẢO) */}
+        <div className="pt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 lg:gap-5">
           {categories.map((cat) => {
             const isSelected = selectedCategory === cat.slug;
             return (
               <div
                 key={cat.id}
                 onClick={() => onSelectCategory(isSelected ? 'ALL' : cat.slug)}
-                className={`group flex flex-col items-center text-center p-4 rounded-2xl cursor-pointer transition-all border ${
+                className={`group flex flex-col justify-between bg-white cursor-pointer transition-all duration-200 border ${
                   isSelected
-                    ? 'border-black bg-neutral-50 shadow-md ring-2 ring-black/10'
-                    : 'border-neutral-200/80 bg-white hover:border-neutral-400 hover:shadow-lg'
+                    ? 'border-black ring-2 ring-black shadow-md'
+                    : 'border-neutral-200 hover:border-neutral-400 hover:shadow-md'
                 }`}
               >
-                {/* Rounded Image Container like bubigsize.vn */}
-                <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden bg-neutral-100 flex items-center justify-center p-2 mb-3 border border-neutral-100 group-hover:scale-105 transition-transform duration-300">
-                  <img
-                    src={cat.image}
-                    alt={cat.name}
-                    className="w-full h-full object-contain"
-                    loading="lazy"
-                  />
+                {/* 1. KHU VỰC ICON & TÊN NGẮN (NỀN TRẮNG VUÔNG VỨC) */}
+                <div className="flex-1 flex flex-col items-center justify-center p-6 min-h-[170px] sm:min-h-[190px]">
+                  <div className="text-black transition-transform duration-300 group-hover:scale-105 flex items-center justify-center">
+                    <CategoryFashionIcon slug={cat.slug} className="w-16 h-16 sm:w-20 sm:h-20 text-black" />
+                  </div>
+                  <span className="mt-4 text-xs sm:text-sm font-medium text-neutral-800 tracking-wide text-center">
+                    {cat.shortName || cat.name}
+                  </span>
                 </div>
 
-                {/* Name */}
-                <h3 className="text-sm font-extrabold text-neutral-900 group-hover:text-[#e5677d] transition-colors">
-                  {cat.name}
-                </h3>
-
-                {/* Number of products */}
-                <span className="text-[11px] text-neutral-400 mt-0.5">
-                  {cat.itemCount} sản phẩm
-                </span>
-
-                {/* See more arrow circle */}
-                <div className={`mt-3 w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+                {/* 2. KHU VỰC THÔNG TIN DƯỚI (NỀN XÁM NHẠT VỚI TÊN ĐẦY ĐỦ VÀ SỐ LƯỢNG) */}
+                <div className={`py-3 px-3 text-center border-t transition-colors ${
                   isSelected 
-                    ? 'bg-black text-white' 
-                    : 'bg-neutral-100 text-neutral-500 group-hover:bg-[#e5677d] group-hover:text-white'
+                    ? 'bg-neutral-100 border-neutral-300' 
+                    : 'bg-[#fbfbfb] border-neutral-100 group-hover:bg-neutral-100'
                 }`}>
-                  <ChevronRight className="w-4 h-4" />
+                  <h4 className="text-[12px] sm:text-[13px] font-bold text-neutral-900 leading-tight">
+                    {cat.fullName || cat.name}
+                  </h4>
+                  <p className="text-[10px] sm:text-[11px] text-neutral-400 mt-0.5">
+                    {cat.itemCount} sản phẩm
+                  </p>
                 </div>
               </div>
             );
@@ -120,4 +115,3 @@ export default function SeasonCollectionSection({
     </section>
   );
 }
-

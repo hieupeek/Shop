@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
 
 type HeroBannerProps = {
   activeTab: 'ALL' | 'WOMEN' | 'MEN';
@@ -11,27 +11,33 @@ type HeroBannerProps = {
 const SLIDES = [
   {
     id: 1,
-    title: 'BỘ SƯU TẬP MỚI NHẤT',
-    subtitle: 'Thời trang thanh lịch & hiện đại cho cả Nam và Nữ',
-    imageUrl: 'https://theme.hstatic.net/200001016175/1001381733/14/slider_1.jpg?v=44',
+    tag: 'PLUXXL COLLECTION 2026',
+    title: 'BỘ SƯU TẬP NGOẠI CỠ 2026',
+    subtitle: 'Thiết kế phom chuẩn cho người từ 65kg đến 130kg. Tôn dáng tự tin, thoải mái vận động cả ngày.',
+    primaryImage: '/images/products/men_polo_raglan_sage.webp',
+    secondaryImage: '/images/products/women_set_pleated_gray.webp',
     gender: 'ALL' as const,
-    cta: 'Khám phá ngay',
+    highlights: ['Phom suông che khuyết điểm bụng', 'Vải thoáng khí, co giãn 4 chiều', 'Đủ size từ L đến 5XL'],
   },
   {
     id: 2,
+    tag: 'BST THỜI TRANG NỮ',
     title: 'THỜI TRANG NỮ THANH LỊCH',
-    subtitle: 'Đầm xòe, váy chữ A, áo kiểu che khuyết điểm tôn dáng',
-    imageUrl: 'https://theme.hstatic.net/200001016175/1001381733/14/banner_slide_1_img_1_img.jpg?v=44',
+    subtitle: 'Set bộ công sở, áo sơ mi kẻ, chân váy xếp ly và áo croptop che khuyết điểm tôn trọn nét duyên.',
+    primaryImage: '/images/products/women_set_pleated_gray.webp',
+    secondaryImage: '/images/products/women_top_croptop_jeans.webp',
     gender: 'WOMEN' as const,
-    cta: 'Xem đồ nữ',
+    highlights: ['Thiết kế chiết eo giấu bụng', 'Chất liệu lụa tơ tuyết mềm mát', 'Size L đến 4XL (55-105kg)'],
   },
   {
     id: 3,
-    title: 'THỜI TRANG NAM HIỆN ĐẠI',
-    subtitle: 'Polo co giãn 4 chiều, sơ mi sợi tre chống nhăn và quần âu lịch lãm',
-    imageUrl: 'https://theme.hstatic.net/200001016175/1001381733/14/banner_slide_1_img_2_img.jpg?v=44',
+    tag: 'BST THỜI TRANG NAM',
+    title: 'THỜI TRANG NAM LỊCH LÃM',
+    subtitle: 'Polo raglan thể thao, sơ mi modal chống nhăn và quần âu cạp chun ẩn nam tính, phong độ.',
+    primaryImage: '/images/products/men_shirt_blue_pattern.webp',
+    secondaryImage: '/images/products/men_tshirt_danise_red.webp',
     gender: 'MEN' as const,
-    cta: 'Xem đồ nam',
+    highlights: ['Vải sợi modal & cotton cao cấp', 'Cạp chun ẩn co giãn thông minh', 'Size XL đến 5XL (70-140kg)'],
   },
 ];
 
@@ -49,44 +55,67 @@ export default function HeroBanner({ activeTab, setActiveTab }: HeroBannerProps)
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
 
   return (
-    <div className="relative w-full overflow-hidden bg-neutral-900 group">
-      {/* SLIDER WRAPPER */}
+    <div className="relative w-full overflow-hidden bg-[#0a0a0c] group">
+      {/* SLIDER TRACK */}
       <div 
         className="flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
-        {SLIDES.map((slide, idx) => (
-          <div key={slide.id} className="w-full shrink-0 relative min-h-[360px] sm:min-h-[480px] lg:min-h-[580px] flex items-center">
-            {/* Background Image */}
-            <img
-              src={slide.imageUrl}
-              alt={slide.title}
-              className="absolute inset-0 w-full h-full object-cover object-center"
-            />
-            
-            {/* Overlay Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
+        {SLIDES.map((slide) => (
+          <div 
+            key={slide.id} 
+            className="w-full shrink-0 relative min-h-[460px] sm:min-h-[520px] lg:min-h-[560px] flex items-center overflow-hidden"
+          >
+            {/* 1. NỀN AMBIENT BLUR NGHỆ THUẬT PHÍA SAU (Ánh sáng đồng điệu theo ảnh sản phẩm) */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <img
+                src={slide.primaryImage}
+                alt=""
+                className="w-full h-full object-cover object-top filter blur-3xl opacity-15 scale-125"
+                aria-hidden="true"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0c] via-[#0a0a0c]/90 to-[#0a0a0c]/60" />
+            </div>
 
-            {/* Content overlay */}
-            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full text-white">
-              <div className="max-w-xl space-y-4">
-                <span className="inline-block bg-[#080808]/80 backdrop-blur-xs text-white text-[11px] font-bold uppercase tracking-widest px-3 py-1 rounded-md border border-white/20">
-                  BU COLLECTION 2026
-                </span>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+            {/* 2. KHU VỰC HIỂN THỊ CHÍNH (GRID 2 CỘT SANG TRỌNG) */}
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center z-10">
+              
+              {/* CỘT TRÁI: TIÊU ĐỀ & NỘI DUNG (span 7) */}
+              <div className="lg:col-span-7 space-y-4 text-white text-center lg:text-left">
+                {/* Badge Tag */}
+                <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 text-[11px] font-bold uppercase tracking-wider text-white">
+                  <Sparkles className="w-3.5 h-3.5 text-[#e5677d]" />
+                  <span>{slide.tag}</span>
+                </div>
+
+                {/* Main Headline */}
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
                   {slide.title}
                 </h1>
-                <p className="text-xs sm:text-sm md:text-base text-neutral-200 leading-relaxed max-w-md">
+
+                {/* Subtitle */}
+                <p className="text-xs sm:text-sm lg:text-base text-neutral-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
                   {slide.subtitle}
                 </p>
 
-                <div className="pt-2 flex flex-wrap gap-3">
+                {/* Highlights bullets */}
+                <div className="pt-1 flex flex-wrap justify-center lg:justify-start gap-x-4 gap-y-2 text-xs text-neutral-300">
+                  {slide.highlights.map((h, i) => (
+                    <span key={i} className="inline-flex items-center gap-1.5 bg-white/5 px-2.5 py-1 rounded-md border border-white/10">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#e5677d]" />
+                      <span>{h}</span>
+                    </span>
+                  ))}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="pt-4 flex flex-wrap justify-center lg:justify-start gap-3">
                   <button
                     onClick={() => setActiveTab('MEN')}
                     className={`px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer shadow-md ${
                       activeTab === 'MEN'
                         ? 'bg-white text-black'
-                        : 'bg-black/80 hover:bg-black text-white border border-white/30'
+                        : 'bg-white/10 hover:bg-white text-white hover:text-black border border-white/20'
                     }`}
                   >
                     <span>Quần áo nam</span>
@@ -97,8 +126,8 @@ export default function HeroBanner({ activeTab, setActiveTab }: HeroBannerProps)
                     onClick={() => setActiveTab('WOMEN')}
                     className={`px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer shadow-md ${
                       activeTab === 'WOMEN'
-                        ? 'bg-[#e5677d] text-white'
-                        : 'bg-black/80 hover:bg-[#e5677d] text-white border border-white/30'
+                        ? 'bg-[#e5677d] text-white shadow-lg shadow-pink-500/30'
+                        : 'bg-white/10 hover:bg-[#e5677d] text-white border border-white/20'
                     }`}
                   >
                     <span>Quần áo nữ</span>
@@ -106,6 +135,33 @@ export default function HeroBanner({ activeTab, setActiveTab }: HeroBannerProps)
                   </button>
                 </div>
               </div>
+
+              {/* CỘT PHẢI: ẢNH NGƯỜI MẪU TRỌN VẸN (span 5) - THẤY RÕ TỪ ĐẦU ĐẾN CHÂN */}
+              <div className="lg:col-span-5 flex justify-center lg:justify-end items-center gap-3 sm:gap-4">
+                
+                {/* Ảnh chính: Người mẫu chuẩn form, căn từ đỉnh đầu (object-top) */}
+                <div className="relative w-44 sm:w-56 lg:w-60 h-[320px] sm:h-[400px] lg:h-[450px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-neutral-900 group-hover:scale-[1.02] transition-transform duration-500">
+                  <img
+                    src={slide.primaryImage}
+                    alt={slide.title}
+                    className="w-full h-full object-cover object-top"
+                  />
+                  {/* Subtle inner shadow bottom */}
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                </div>
+
+                {/* Ảnh phụ cạnh bên: Tạo bố cục tạp chí thời trang phong phú */}
+                <div className="hidden sm:block relative w-36 sm:w-44 lg:w-48 h-[270px] sm:h-[340px] lg:h-[380px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-white/10 bg-neutral-900 opacity-90 hover:opacity-100 transition-opacity">
+                  <img
+                    src={slide.secondaryImage}
+                    alt={slide.title}
+                    className="w-full h-full object-cover object-top"
+                  />
+                  <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
+                </div>
+
+              </div>
+
             </div>
           </div>
         ))}
@@ -114,7 +170,7 @@ export default function HeroBanner({ activeTab, setActiveTab }: HeroBannerProps)
       {/* NAVIGATION ARROWS */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 bg-black/40 hover:bg-black/80 text-white rounded-full transition-all opacity-0 group-hover:opacity-100 cursor-pointer backdrop-blur-xs"
+        className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 bg-black/50 hover:bg-black/90 text-white rounded-full transition-all opacity-0 group-hover:opacity-100 cursor-pointer backdrop-blur-md border border-white/10 z-20"
         aria-label="Previous Slide"
       >
         <ChevronLeft className="w-6 h-6" />
@@ -122,7 +178,7 @@ export default function HeroBanner({ activeTab, setActiveTab }: HeroBannerProps)
 
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 bg-black/40 hover:bg-black/80 text-white rounded-full transition-all opacity-0 group-hover:opacity-100 cursor-pointer backdrop-blur-xs"
+        className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 bg-black/50 hover:bg-black/90 text-white rounded-full transition-all opacity-0 group-hover:opacity-100 cursor-pointer backdrop-blur-md border border-white/10 z-20"
         aria-label="Next Slide"
       >
         <ChevronRight className="w-6 h-6" />
@@ -135,7 +191,7 @@ export default function HeroBanner({ activeTab, setActiveTab }: HeroBannerProps)
             key={i}
             onClick={() => setCurrentSlide(i)}
             className={`h-2 rounded-full transition-all cursor-pointer ${
-              currentSlide === i ? 'w-8 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'
+              currentSlide === i ? 'w-8 bg-white' : 'w-2 bg-white/40 hover:bg-white/80'
             }`}
             aria-label={`Go to slide ${i + 1}`}
           />

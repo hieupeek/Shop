@@ -5,7 +5,7 @@ import CartDrawer from '@/components/CartDrawer';
 import ProductDetailModal from '@/components/ProductDetailModal';
 
 export const metadata: Metadata = {
-  title: 'BU FASHION - Thời Trang Quần Áo Nam & Nữ',
+  title: 'PLUXXL - Thời Trang Bigsize Nam & Nữ',
   description: 'Trang mua sắm quần áo thời trang nam và nữ. Đa dạng mẫu mã áo polo, sơ mi, đầm váy, quần âu.',
 };
 

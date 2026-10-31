@@ -23,10 +23,16 @@ export default function HomePage() {
   const [selectedSizeFilter, setSelectedSizeFilter] = useState<string>('ALL');
   const [sortBy, setSortBy] = useState<'POPULAR' | 'PRICE_ASC' | 'PRICE_DESC' | 'NEW'>('POPULAR');
 
-  // Filter categories by selected gender
+  // Filter categories by selected gender & calculate EXACT product count from PRODUCTS array
   const filteredCategories = useMemo(() => {
-    if (activeGenderTab === 'ALL') return CATEGORIES;
-    return CATEGORIES.filter((c) => c.gender === activeGenderTab);
+    const list = activeGenderTab === 'ALL' 
+      ? CATEGORIES 
+      : CATEGORIES.filter((c) => c.gender === activeGenderTab);
+
+    return list.map((c) => ({
+      ...c,
+      itemCount: PRODUCTS.filter((p) => p.categorySlug === c.slug).length,
+    }));
   }, [activeGenderTab]);
 
   // Filter and sort products
@@ -43,7 +49,7 @@ export default function HomePage() {
 
     if (selectedSizeFilter !== 'ALL') {
       result = result.filter((p) => 
-        p.sizes.some((s) => s.toLowerCase() === selectedSizeFilter.toLowerCase())
+        p.sizes.some((s) => s.toLowerCase().includes(selectedSizeFilter.toLowerCase()))
       );
     }
 
@@ -60,7 +66,7 @@ export default function HomePage() {
     return result;
   }, [activeGenderTab, selectedCategory, selectedSizeFilter, sortBy]);
 
-  const allAvailableSizes = ['ALL', 'S', 'M', 'L', 'XL', '2XL', '3XL'];
+  const allAvailableSizes = ['ALL', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
 
   return (
     <div className="flex flex-col min-h-screen">

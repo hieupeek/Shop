@@ -133,7 +133,7 @@ export default function CartDrawer() {
               </div>
               <h4 className="text-xl font-black text-neutral-900">ĐẶT HÀNG THÀNH CÔNG!</h4>
               <p className="text-xs text-neutral-600 leading-relaxed max-w-xs mx-auto">
-                Cảm ơn <strong>{customerName}</strong>. Nhân viên BU Bigsize sẽ liên hệ số <strong>{customerPhone}</strong> để xác nhận số đo và đơn hàng trong vòng 15 phút.
+                Cảm ơn <strong>{customerName}</strong>. Nhân viên PLUXXL sẽ liên hệ số <strong>{customerPhone}</strong> để xác nhận số đo và đơn hàng trong vòng 15 phút.
               </p>
               <div className="p-3 bg-neutral-50 rounded-xl text-xs text-neutral-500 border border-neutral-200">
                 Phương thức: <strong>{paymentMethod === 'COD' ? 'Thanh toán khi nhận hàng (COD)' : 'Quét mã VietQR khi nhận'}</strong>
