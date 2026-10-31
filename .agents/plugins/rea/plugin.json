@@ -1,0 +1,6 @@
+{
+  "name": "rea",
+  "description": "Reverse Engineer Anything (REA) - One MCP for reverse engineering across binaries, applications, and runtime behavior.",
+  "repository": "https://github.com/morluto/rea"
+}
+

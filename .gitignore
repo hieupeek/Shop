@@ -1,0 +1,11 @@
+# Dependencies
+node_modules/
+.agents/plugins/rea/node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS Files
+.DS_Store
+

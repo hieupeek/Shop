@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "rea": {
+      "command": "/usr/local/bin/node",
+      "args": [
+        "/Users/hieu/Desktop/Shop/.agents/plugins/rea/node_modules/rea-agents/scripts/rea.mjs",
+        "mcp"
+      ]
+    }
+  }
+}
+
