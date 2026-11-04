@@ -66,10 +66,12 @@ export type CartItem = {
 export type CustomerReview = {
   id: string;
   customerName: string;
-  avatar: string;
+  author?: string;
+  avatar?: string;
   productName: string;
   rating: number;
   comment: string;
   date: string;
-  verified: boolean;
+  verified?: boolean;
 };
+

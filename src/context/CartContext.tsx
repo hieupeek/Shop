@@ -15,6 +15,8 @@ type CartContextType = {
   setIsCartOpen: (open: boolean) => void;
   quickViewProduct: Product | null;
   setQuickViewProduct: (product: Product | null) => void;
+  tryOnProduct: Product | null;
+  setTryOnProduct: (product: Product | null) => void;
   freeShippingThreshold: number;
 };
 
@@ -24,6 +26,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [tryOnProduct, setTryOnProduct] = useState<Product | null>(null);
 
   const freeShippingThreshold = 500000;
 
@@ -118,6 +121,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         setIsCartOpen,
         quickViewProduct,
         setQuickViewProduct,
+        tryOnProduct,
+        setTryOnProduct,
         freeShippingThreshold,
       }}
     >

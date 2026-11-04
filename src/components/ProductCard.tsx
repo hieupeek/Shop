@@ -4,14 +4,14 @@ import React, { useState } from 'react';
 import { Product } from '@/types';
 import { formatVND } from '@/lib/utils';
 import { useCart } from '@/context/CartContext';
-import { ShoppingBag, Eye, Star } from 'lucide-react';
+import { ShoppingBag, Eye, Star, Sparkles } from 'lucide-react';
 
 type ProductCardProps = {
   product: Product;
 };
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { addToCart, setQuickViewProduct } = useCart();
+  const { addToCart, setQuickViewProduct, setTryOnProduct } = useCart();
   const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name || '');
   const [selectedSize, setSelectedSize] = useState(product.sizes[0] || 'L');
   const [isHovered, setIsHovered] = useState(false);
@@ -58,6 +58,18 @@ export default function ProductCard({ product }: ProductCardProps) {
           title="Xem chi tiết"
         >
           <Eye className="w-4 h-4" />
+        </button>
+
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setTryOnProduct(product);
+          }}
+          className="absolute bottom-3 left-3 right-3 py-2 px-3 bg-white/95 hover:bg-white text-violet-700 hover:text-violet-900 rounded-xl text-xs font-bold opacity-0 group-hover:opacity-100 transition-all shadow-lg cursor-pointer flex items-center justify-center gap-1.5 backdrop-blur-xs border border-violet-100 hover:scale-[1.02]"
+          title="Thử đồ AI với Anywear Decart"
+        >
+          <Sparkles className="w-3.5 h-3.5 text-violet-600 animate-pulse" />
+          <span>Thử đồ AI</span>
         </button>
       </div>
 

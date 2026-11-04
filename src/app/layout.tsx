@@ -3,6 +3,7 @@ import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import CartDrawer from '@/components/CartDrawer';
 import ProductDetailModal from '@/components/ProductDetailModal';
+import VirtualTryOnModal from '@/components/VirtualTryOnModal';
 
 export const metadata: Metadata = {
   title: 'PLUXXL - Thời Trang Bigsize Nam & Nữ',
@@ -21,6 +22,7 @@ export default function RootLayout({
           {children}
           <CartDrawer />
           <ProductDetailModal />
+          <VirtualTryOnModal />
         </CartProvider>
       </body>
     </html>

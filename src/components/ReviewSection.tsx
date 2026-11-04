@@ -41,7 +41,7 @@ export default function ReviewSection() {
 
               <div className="mt-4 pt-3 border-t border-neutral-100 flex items-center justify-between">
                 <div>
-                  <h4 className="text-xs font-bold text-neutral-900">{r.author}</h4>
+                  <h4 className="text-xs font-bold text-neutral-900">{r.customerName}</h4>
                   <p className="text-[10px] text-neutral-400 line-clamp-1">{r.productName}</p>
                 </div>
                 <div className="flex items-center text-[10px] text-emerald-600 font-semibold gap-1">

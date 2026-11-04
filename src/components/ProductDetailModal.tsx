@@ -8,11 +8,12 @@ import {
   ShoppingBag, 
   Star, 
   ShieldCheck, 
-  Truck
+  Truck,
+  Sparkles
 } from 'lucide-react';
 
 export default function ProductDetailModal() {
-  const { quickViewProduct, setQuickViewProduct, addToCart } = useCart();
+  const { quickViewProduct, setQuickViewProduct, addToCart, setTryOnProduct } = useCart();
   const [selectedColor, setSelectedColor] = useState<string>('');
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [quantity, setQuantity] = useState(1);
@@ -195,14 +196,27 @@ export default function ProductDetailModal() {
             </div>
 
             {/* ACTION BUTTON */}
-            <div className="mt-6 pt-4 border-t border-neutral-200 space-y-3">
-              <button
-                onClick={handleAddToCart}
-                className="w-full bg-[#080808] hover:bg-neutral-800 text-white font-bold text-sm py-3.5 rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-98"
-              >
-                <ShoppingBag className="w-5 h-5" />
-                <span>THÊM VÀO GIỎ - {formatVND(quickViewProduct.basePrice * quantity)}</span>
-              </button>
+            <div className="mt-6 pt-4 border-t border-neutral-200 space-y-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <button
+                  onClick={handleAddToCart}
+                  className="sm:col-span-2 bg-[#080808] hover:bg-neutral-800 text-white font-bold text-sm py-3.5 rounded-2xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>THÊM VÀO GIỎ</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    setTryOnProduct(quickViewProduct);
+                  }}
+                  className="sm:col-span-1 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold text-xs py-3.5 px-3 rounded-2xl transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer active:scale-98"
+                  title="Thử đồ ảo bằng AI qua Webcam hoặc tải ảnh của bạn"
+                >
+                  <Sparkles className="w-4 h-4 text-amber-300 animate-spin" style={{ animationDuration: '3s' }} />
+                  <span>Thử đồ AI</span>
+                </button>
+              </div>
 
               <div className="grid grid-cols-2 gap-2 text-[11px] text-neutral-500 text-center">
                 <div className="flex items-center justify-center gap-1 bg-neutral-50 py-1.5 rounded-lg">
