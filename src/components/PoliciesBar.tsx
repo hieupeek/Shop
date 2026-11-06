@@ -4,23 +4,23 @@ export default function PoliciesBar() {
   const policies = [
     {
       icon: 'https://theme.hstatic.net/200001016175/1001381733/14/policies_icon_1.png?v=44',
-      title: 'Đổi hàng miễn phí',
-      desc: 'Đổi hàng miễn phí trong vòng 7 ngày đối với sản phẩm nguyên giá',
+      title: 'Cho thuê tiết kiệm 70%',
+      desc: 'Hỗ trợ thuê 3 - 5 ngày đi tiệc, giặt hấp sạch thơm, hoàn cọc nhanh trong 24h',
     },
     {
       icon: 'https://theme.hstatic.net/200001016175/1001381733/14/policies_icon_3.png?v=44',
-      title: 'Bảo đảm chất lượng',
-      desc: 'Sản phẩm đã được kiểm định nghiêm ngặt về chất liệu và đường may',
+      title: 'Make up chuyên nghiệp',
+      desc: 'Artist thấu hiểu tone da, tạo khối thon gọn mặt tròn, bền màu suốt 12 tiếng',
     },
     {
       icon: 'https://theme.hstatic.net/200001016175/1001381733/14/policies_icon_4.png?v=44',
-      title: 'Giao hàng toàn quốc',
-      desc: 'Vận chuyển nhanh chóng, khách được kiểm tra trước khi nhận hàng',
+      title: 'Giao nhận toàn quốc',
+      desc: 'Giao tận nhà đúng hẹn, kiểm tra thử đồ thoải mái trước khi nhận hàng',
     },
     {
       icon: 'https://theme.hstatic.net/200001016175/1001381733/14/policies_icon_1.png?v=44',
-      title: 'Hỗ trợ tư vấn 24/7',
-      desc: 'Hotline 0963.511.933 luôn sẵn sàng giải đáp và tư vấn chọn size',
+      title: 'Đủ size L - 5XL (55-140kg)',
+      desc: 'Bảo hành form dáng, hỗ trợ đổi size miễn phí trong 7 ngày nếu không vừa',
     },
   ];
 

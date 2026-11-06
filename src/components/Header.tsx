@@ -7,20 +7,29 @@ import {
   ShoppingBag, 
   Search, 
   Menu, 
-  X,
-  UserCog
+  X, 
+  UserCog,
+  Sparkles,
+  CalendarHeart
 } from 'lucide-react';
 
 type HeaderProps = {
-  activeTab: 'ALL' | 'WOMEN' | 'MEN';
-  setActiveTab: (tab: 'ALL' | 'WOMEN' | 'MEN') => void;
+  activeTab: 'WOMEN' | 'MEN';
+  setActiveTab: (tab: 'WOMEN' | 'MEN') => void;
 };
 
 export default function Header({ activeTab, setActiveTab }: HeaderProps) {
-  const { totalCount, setIsCartOpen } = useCart();
+  const { totalCount, setIsCartOpen, openMakeupModal } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearchModal, setShowSearchModal] = useState(false);
+
+  const scrollToOccasion = () => {
+    const el = document.getElementById('occasion-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
@@ -43,24 +52,29 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
             <div className="flex items-center">
               <Link 
                 href="/" 
-                onClick={() => setActiveTab('ALL')}
+                onClick={() => setActiveTab('WOMEN')}
                 className="flex items-baseline gap-1 group cursor-pointer"
               >
-                <span className="text-2xl sm:text-3xl font-black tracking-wider text-[#080808]">PLUX<span className="text-[#e5677d]">XL</span></span>
+                <span className="text-2xl sm:text-3xl font-black tracking-wider text-[#080808]">
+                  PLUX<span className="text-[#e5677d]">XL</span>
+                </span>
+                <span className="hidden sm:inline text-[10px] font-bold text-neutral-400 uppercase tracking-widest ml-1">
+                  Bigsize Fashion & Rental
+                </span>
               </Link>
             </div>
 
-            {/* DESKTOP NAVIGATION: Home, Quần áo nam, Quần áo nữ */}
-            <nav className="hidden md:flex items-center space-x-8 text-sm font-bold tracking-wide">
+            {/* DESKTOP NAVIGATION: Nữ, Nam, Gợi ý theo dịp & Thuê đồ, Đặt lịch Make Up */}
+            <nav className="hidden md:flex items-center space-x-7 text-sm font-bold tracking-wide">
               <button
-                onClick={() => setActiveTab('ALL')}
+                onClick={() => setActiveTab('WOMEN')}
                 className={`transition-colors py-2 relative uppercase cursor-pointer ${
-                  activeTab === 'ALL' ? 'text-black' : 'text-neutral-500 hover:text-black'
+                  activeTab === 'WOMEN' ? 'text-black' : 'text-neutral-500 hover:text-black'
                 }`}
               >
-                Trang chủ
-                {activeTab === 'ALL' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-black" />
+                Quần áo nữ
+                {activeTab === 'WOMEN' && (
+                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#e5677d]" />
                 )}
               </button>
 
@@ -77,15 +91,19 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
               </button>
 
               <button
-                onClick={() => setActiveTab('WOMEN')}
-                className={`transition-colors py-2 relative uppercase cursor-pointer ${
-                  activeTab === 'WOMEN' ? 'text-black' : 'text-neutral-500 hover:text-black'
-                }`}
+                onClick={scrollToOccasion}
+                className="transition-colors py-2 text-neutral-600 hover:text-[#e5677d] uppercase flex items-center gap-1.5 cursor-pointer font-bold"
               >
-                Quần áo nữ
-                {activeTab === 'WOMEN' && (
-                  <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-black" />
-                )}
+                <Sparkles className="w-4 h-4 text-[#e5677d]" />
+                <span>Gợi ý theo dịp & Thuê đồ</span>
+              </button>
+
+              <button
+                onClick={() => openMakeupModal()}
+                className="transition-all py-1.5 px-3 bg-pink-50 hover:bg-pink-100 text-[#e5677d] border border-pink-200 rounded-xl text-xs font-black uppercase flex items-center gap-1.5 cursor-pointer shadow-2xs hover:scale-102"
+              >
+                <CalendarHeart className="w-4 h-4" />
+                <span>Đặt Lịch Make Up</span>
               </button>
             </nav>
 
@@ -129,30 +147,42 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
 
         {/* MOBILE MENU */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-neutral-200 px-4 py-4 space-y-3">
+          <div className="md:hidden bg-white border-t border-neutral-200 px-4 py-4 space-y-2">
             <button
-              onClick={() => { setActiveTab('ALL'); setMobileMenuOpen(false); }}
-              className={`w-full text-left py-2 px-3 text-sm font-bold rounded-lg ${
-                activeTab === 'ALL' ? 'bg-neutral-100 text-black' : 'text-neutral-600'
+              onClick={() => { setActiveTab('WOMEN'); setMobileMenuOpen(false); }}
+              className={`w-full text-left py-2.5 px-3 text-sm font-bold rounded-xl ${
+                activeTab === 'WOMEN' ? 'bg-pink-50 text-[#e5677d]' : 'text-neutral-700 hover:bg-neutral-100'
               }`}
             >
-              Trang chủ
+              👗 Quần áo nữ Bigsize
             </button>
             <button
               onClick={() => { setActiveTab('MEN'); setMobileMenuOpen(false); }}
-              className={`w-full text-left py-2 px-3 text-sm font-bold rounded-lg ${
-                activeTab === 'MEN' ? 'bg-neutral-100 text-black' : 'text-neutral-600'
+              className={`w-full text-left py-2.5 px-3 text-sm font-bold rounded-xl ${
+                activeTab === 'MEN' ? 'bg-neutral-100 text-black' : 'text-neutral-700 hover:bg-neutral-100'
               }`}
             >
-              Quần áo nam
+              👔 Quần áo nam Bigsize
             </button>
             <button
-              onClick={() => { setActiveTab('WOMEN'); setMobileMenuOpen(false); }}
-              className={`w-full text-left py-2 px-3 text-sm font-bold rounded-lg ${
-                activeTab === 'WOMEN' ? 'bg-neutral-100 text-black' : 'text-neutral-600'
-              }`}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                scrollToOccasion();
+              }}
+              className="w-full text-left py-2.5 px-3 text-sm font-bold rounded-xl text-neutral-700 hover:bg-neutral-100 flex items-center gap-2"
             >
-              Quần áo nữ
+              <Sparkles className="w-4 h-4 text-[#e5677d]" />
+              <span>Gợi ý theo dịp & Thuê trang phục</span>
+            </button>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                openMakeupModal();
+              }}
+              className="w-full text-left py-2.5 px-3 text-sm font-bold rounded-xl bg-pink-50 text-[#e5677d] flex items-center gap-2"
+            >
+              <CalendarHeart className="w-4 h-4" />
+              <span>Đặt lịch Make Up chuyên nghiệp</span>
             </button>
             <div className="pt-2 border-t border-neutral-200">
               <Link
@@ -172,7 +202,7 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-start justify-center pt-20 px-4">
           <div className="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl">
             <div className="flex items-center justify-between pb-3 border-b border-neutral-200">
-              <h3 className="font-bold text-base text-neutral-900">Tìm kiếm quần áo</h3>
+              <h3 className="font-bold text-base text-neutral-900">Tìm kiếm trang phục & Dịch vụ</h3>
               <button 
                 onClick={() => setShowSearchModal(false)}
                 className="p-1 text-neutral-400 hover:text-black rounded-lg cursor-pointer"
@@ -187,16 +217,16 @@ export default function Header({ activeTab, setActiveTab }: HeaderProps) {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Nhập tên áo, quần, đầm váy cần tìm..."
+                placeholder="Nhập tên áo, quần, đầm váy, đồ thuê dự tiệc..."
                 className="w-full pl-10 pr-4 py-2.5 border border-neutral-300 rounded-xl focus:outline-hidden focus:border-black text-sm"
                 autoFocus
               />
             </div>
 
             <div className="mt-4">
-              <p className="text-xs font-semibold text-neutral-400 mb-2">GỢI Ý:</p>
+              <p className="text-xs font-semibold text-neutral-400 mb-2">GỢI Ý TÌM NHANH:</p>
               <div className="flex flex-wrap gap-2">
-                {['Áo polo nam', 'Áo sơ mi', 'Đầm xoắn eo', 'Quần tây nam', 'Set trang phục'].map((tag) => (
+                {['Đầm dự tiệc thuê', 'Make up cô dâu', 'Sơ mi nam công sở', 'Áo cổ sen chân váy xếp ly', 'Quần jean cạp chun'].map((tag) => (
                   <button
                     key={tag}
                     onClick={() => setSearchQuery(tag)}

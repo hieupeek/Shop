@@ -4,14 +4,14 @@ import React, { useState } from 'react';
 import { Product } from '@/types';
 import { formatVND } from '@/lib/utils';
 import { useCart } from '@/context/CartContext';
-import { ShoppingBag, Eye, Star } from 'lucide-react';
+import { ShoppingBag, Eye, Star, Sparkles } from 'lucide-react';
 
 type ProductCardProps = {
   product: Product;
 };
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { addToCart, setQuickViewProduct } = useCart();
+  const { setQuickViewProduct } = useCart();
   const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name || '');
   const [selectedSize, setSelectedSize] = useState(product.sizes[0] || 'L');
   const [isHovered, setIsHovered] = useState(false);
@@ -20,10 +20,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   const hoverImage = product.images[1]?.url || product.images[0]?.url;
   const currentImage = isHovered && product.images.length > 1 ? hoverImage : (colorImage || product.images[0]?.url);
 
-  const handleQuickAdd = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    addToCart(product, selectedSize, selectedColor, 1);
-  };
+  const isRentable = product.isRentable !== false;
+  const rentalPrice = product.rentalPrice || Math.round(product.basePrice * 0.28);
 
   return (
     <div
@@ -43,11 +41,19 @@ export default function ProductCard({ product }: ProductCardProps) {
           loading="lazy"
         />
 
-        {product.discountPercent && (
-          <span className="absolute top-3 left-3 bg-red-600 text-white text-[11px] font-bold px-2 py-0.5 rounded-md shadow-xs">
-            -{product.discountPercent}%
-          </span>
-        )}
+        <div className="absolute top-3 left-3 flex flex-col gap-1 items-start">
+          {product.discountPercent && (
+            <span className="bg-red-600 text-white text-[11px] font-black px-2 py-0.5 rounded-md shadow-xs">
+              -{product.discountPercent}%
+            </span>
+          )}
+          {isRentable && (
+            <span className="bg-[#e5677d] text-white text-[10px] font-black px-2 py-0.5 rounded-md shadow-xs flex items-center gap-1">
+              <Sparkles className="w-3 h-3" />
+              Cho thuê
+            </span>
+          )}
+        </div>
 
         <button
           onClick={(e) => {
@@ -55,7 +61,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             setQuickViewProduct(product);
           }}
           className="absolute top-3 right-3 p-2 bg-white/90 hover:bg-white text-neutral-800 rounded-full opacity-0 group-hover:opacity-100 transition-all shadow-md cursor-pointer hover:scale-110"
-          title="Xem chi tiết"
+          title="Xem chi tiết & Chọn mua / thuê"
         >
           <Eye className="w-4 h-4" />
         </button>
@@ -101,7 +107,7 @@ export default function ProductCard({ product }: ProductCardProps) {
 
           {/* SIZES */}
           <div className="flex flex-wrap gap-1 mt-2.5">
-            {product.sizes.map((size) => (
+            {product.sizes.slice(0, 4).map((size) => (
               <button
                 key={size}
                 type="button"
@@ -115,6 +121,11 @@ export default function ProductCard({ product }: ProductCardProps) {
                 {size}
               </button>
             ))}
+            {product.sizes.length > 4 && (
+              <span className="text-[10px] text-neutral-400 px-1 py-0.5 font-bold">
+                +{product.sizes.length - 4}
+              </span>
+            )}
           </div>
         </div>
 
@@ -124,20 +135,20 @@ export default function ProductCard({ product }: ProductCardProps) {
             <div className="text-sm sm:text-base font-black text-black">
               {formatVND(product.basePrice)}
             </div>
-            {product.originalPrice > product.basePrice && (
-              <div className="text-[11px] text-neutral-400 line-through">
-                {formatVND(product.originalPrice)}
+            {isRentable && (
+              <div className="text-[11px] font-black text-[#e5677d]">
+                Thuê: {formatVND(rentalPrice)}/3N
               </div>
             )}
           </div>
 
           <button
-            onClick={handleQuickAdd}
+            onClick={() => setQuickViewProduct(product)}
             className="p-2 sm:px-3 sm:py-2 bg-neutral-900 hover:bg-black text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs active:scale-95"
-            title="Thêm vào giỏ"
+            title="Chọn mua hoặc thuê"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
-            <span className="hidden sm:inline">Thêm Giỏ</span>
+            <span className="hidden sm:inline">Chọn</span>
           </button>
         </div>
       </div>

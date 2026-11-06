@@ -1,5 +1,17 @@
 export type Gender = 'MEN' | 'WOMEN' | 'UNISEX';
 
+export type OccasionSlug = 'tiec-tung' | 'dam-cuoi' | 'chup-anh' | 'cong-so' | 'hen-ho';
+
+export type Occasion = {
+  id: string;
+  name: string;
+  slug: OccasionSlug;
+  description: string;
+  subtitle: string;
+  image: string;
+  badge: string;
+};
+
 export type Category = {
   id: string;
   name: string;
@@ -49,7 +61,16 @@ export type Product = {
   reviewCount: number;
   isNew?: boolean;
   isBestSeller?: boolean;
+
+  // Thuê sản phẩm & Gợi ý theo dịp
+  isRentable?: boolean;
+  rentalPrice?: number; // Giá thuê theo gói (ví dụ 3 ngày)
+  rentalDeposit?: number; // Tiền đặt cọc giữ đồ (hoàn trả 100% khi trả lại trang phục)
+  occasions?: OccasionSlug[]; // Các dịp phù hợp
+  stylistTip?: string; // Lời khuyên phối đồ cho big size
 };
+
+export type CartItemType = 'BUY' | 'RENT';
 
 export type CartItem = {
   id: string;
@@ -61,6 +82,40 @@ export type CartItem = {
   size: string;
   image: string;
   quantity: number;
+
+  // Cho thuê
+  itemType: CartItemType; // 'BUY' hoặc 'RENT'
+  rentalDays?: number; // Số ngày thuê, vd 3 hoặc 5 ngày
+  rentalStartDate?: string; // Ngày nhận đồ
+  rentalEndDate?: string; // Ngày trả đồ
+  deposit?: number; // Tiền đặt cọc của sản phẩm này
+};
+
+export type MakeupPackage = {
+  id: string;
+  name: string;
+  price: number;
+  originalPrice?: number;
+  duration: string;
+  description: string;
+  features: string[];
+  image: string;
+  tag?: string;
+};
+
+export type MakeupBooking = {
+  id?: string;
+  packageId: string;
+  packageName: string;
+  price: number;
+  customerName: string;
+  phone: string;
+  date: string;
+  timeSlot: string;
+  locationType: 'STUDIO' | 'AT_HOME';
+  address?: string;
+  notes?: string;
+  createdAt?: string;
 };
 
 export type CustomerReview = {
@@ -74,4 +129,3 @@ export type CustomerReview = {
   date: string;
   verified?: boolean;
 };
-

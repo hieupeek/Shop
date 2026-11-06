@@ -1,7 +1,123 @@
-import { Category, CustomerReview, Product } from '@/types';
+import { Category, CustomerReview, Product, Occasion, MakeupPackage } from '@/types';
+
+export const OCCASIONS: Occasion[] = [
+  {
+    id: 'occ-1',
+    name: 'Đi Tiệc & Dạ Hội',
+    slug: 'tiec-tung',
+    description: 'Trang phục dạ hội, đầm dự tiệc và sơ mi cao cấp thiết kế sang trọng, phom dáng che khuyết điểm tuyệt đối.',
+    subtitle: 'Nổi bật cuốn hút trong từng bước đi',
+    image: '/images/banners/slider_banner_1.webp',
+    badge: 'Hot nhất mùa tiệc',
+  },
+  {
+    id: 'occ-2',
+    name: 'Đám Cưới & Ăn Hỏi',
+    slug: 'dam-cuoi',
+    description: 'Set đồ thanh lịch nhã nhặn cho khách mời, phụ dâu, phụ rể với tone màu pastel và chất liệu cao cấp.',
+    subtitle: 'Lịch thiệp, tinh tế và rạng rỡ',
+    image: '/images/banners/slider_banner_2.webp',
+    badge: 'Nhiều mẫu thuê nhất',
+  },
+  {
+    id: 'occ-3',
+    name: 'Chụp Ảnh Kỷ Yếu & Concept',
+    slug: 'chup-anh',
+    description: 'Outfit trẻ trung, cá tính lên hình siêu ăn ảnh, tạo hiệu ứng thị giác thon gọn từ mọi góc chụp.',
+    subtitle: 'Lưu giữ khoảnh khắc thanh xuân đẹp nhất',
+    image: '/images/banners/slider_banner_3.webp',
+    badge: 'Lên hình siêu tôn dáng',
+  },
+  {
+    id: 'occ-4',
+    name: 'Công Sở & Phỏng Vấn',
+    slug: 'cong-so',
+    description: 'Áo sơ mi chống nhăn, đầm suông chữ A và quần âu cạp chun thoải mái cả ngày làm việc.',
+    subtitle: 'Chuyên nghiệp, chỉn chu và tự tin',
+    image: '/images/products/women_set_pleated_gray.webp',
+    badge: 'Phong cách Smart Casual',
+  },
+  {
+    id: 'occ-5',
+    name: 'Hẹn Hò & Dạo Phố',
+    slug: 'hen-ho',
+    description: 'Set áo thun phối chân váy, đầm maxi mềm rủ thoải mái vi vu cuối tuần cùng bạn bè và người thương.',
+    subtitle: 'Thoải mái, ngọt ngào và năng động',
+    image: '/images/products/women_top_croptop_jeans.webp',
+    badge: 'Ngọt ngào & Năng động',
+  },
+];
+
+export const MAKEUP_PACKAGES: MakeupPackage[] = [
+  {
+    id: 'mk-01',
+    name: 'Make Up Tiệc Tối & Dạ Hội Glamour',
+    price: 350000,
+    originalPrice: 450000,
+    duration: '45 - 60 phút',
+    description: 'Phong cách makeup sắc sảo, nhấn mắt sâu, khối nét thon gọn gương mặt, lớp nền mỏng bền suốt 12 tiếng.',
+    features: [
+      'Tạo khối thon gọn mặt tròn, che khuyết điểm 100%',
+      'Gắn mi sợi cao cấp tự nhiên & đánh mắt khói quyến rũ',
+      'Định hình chân mày & son môi chuẩn phong cách dạ hội',
+      'Xịt khóa nền kháng nước, kiềm dầu bền màu 12h',
+      'Tặng kèm làm tóc tạo kiểu nhẹ (uốn xoăn sóng / bới sang)'
+    ],
+    image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&auto=format&fit=crop&q=80',
+    tag: 'Được đặt nhiều nhất',
+  },
+  {
+    id: 'mk-02',
+    name: 'Make Up Cô Dâu / Ăn Hỏi Tinh Khôi',
+    price: 850000,
+    originalPrice: 1100000,
+    duration: '90 - 120 phút',
+    description: 'Lớp nền căng bóng trong suốt chuẩn Hàn Quốc, che mọi khuyết điểm, tươi tắn rạng rỡ từ sáng đến đêm.',
+    features: [
+      'Dưỡng ẩm chuyên sâu khóa ẩm trước khi đánh nền',
+      'Lớp nền Glass-Skin mỏng nhẹ tự nhiên không mốc',
+      'Tone trang điểm theo yêu cầu (Hàn Quốc, Thái Lan, Tây)',
+      'Làm tóc cô dâu cầu kỳ kèm phụ kiện cài tóc hoa/vương miện',
+      'Dặm phấn & hỗ trợ thay trang phục tại chỗ'
+    ],
+    image: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80',
+    tag: 'Gói cao cấp',
+  },
+  {
+    id: 'mk-03',
+    name: 'Make Up Kỷ Yếu & Chụp Ảnh Ngoại Cảnh',
+    price: 250000,
+    originalPrice: 320000,
+    duration: '40 - 50 phút',
+    description: 'Tone cam đào / hồng đất ngọt ngào, siêu ăn ảnh dưới nắng tự nhiên, giữ nền không trôi khi di chuyển nhiều.',
+    features: [
+      'Tone makeup trẻ trung, tươi tắn như nàng thơ',
+      'Lớp nền mỏng mịn chống nắng SPF 50+',
+      'Gắn mi chùm tự nhiên mở to tròng mắt',
+      'Tạo kiểu tóc buộc nửa đầu hoặc uốn sóng bồng bềnh'
+    ],
+    image: 'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&auto=format&fit=crop&q=80',
+    tag: 'Học sinh - Sinh viên',
+  },
+  {
+    id: 'mk-04',
+    name: 'Make Up Cá Nhân Nhẹ Nhàng / Đi Chơi',
+    price: 200000,
+    originalPrice: 280000,
+    duration: '30 - 40 phút',
+    description: 'Trang điểm sương sương che quầng thâm và thâm mụn, tôn đường nét tự nhiên thích hợp đi làm, phỏng vấn, cafe.',
+    features: [
+      'Che khuyết điểm tự nhiên, làn da đều màu sáng khỏe',
+      'Kẻ mắt mảnh và chuốt mi cong tự nhiên',
+      'Màu son nhẹ nhàng tôn da mộc',
+      'Sấy cụp phồng chân tóc hoặc duỗi tự nhiên'
+    ],
+    image: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&auto=format&fit=crop&q=80',
+  },
+];
 
 export const PRODUCTS: Product[] = [
-  // === BỘ SƯU TẬP NỮ (10 SẢN PHẨM TỪ ẢNH THẬT) ===
+  // === BỘ SƯU TẬP NỮ ===
   {
     id: 'prod-w-01',
     name: 'Set Bộ Áo Cổ Sen Phối Chân Váy Xếp Ly Công Sở 24YBD53',
@@ -21,6 +137,11 @@ export const PRODUCTS: Product[] = [
     reviewCount: 38,
     isNew: true,
     isBestSeller: true,
+    isRentable: true,
+    rentalPrice: 120000,
+    rentalDeposit: 300000,
+    occasions: ['cong-so', 'dam-cuoi', 'tiec-tung'],
+    stylistTip: 'Phối cùng giày cao gót mũi nhọn 5cm và túi xách đen tối giản để tạo hiệu ứng đôi chân dài và thon gọn.',
   },
   {
     id: 'prod-w-02',
@@ -40,6 +161,11 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 26,
     isNew: true,
+    isRentable: true,
+    rentalPrice: 90000,
+    rentalDeposit: 200000,
+    occasions: ['hen-ho', 'chup-anh'],
+    stylistTip: 'Quần jeans cạp cao che gọn mỡ bụng dưới, phối thêm sneaker trắng năng động.',
   },
   {
     id: 'prod-w-03',
@@ -60,6 +186,11 @@ export const PRODUCTS: Product[] = [
     reviewCount: 45,
     isNew: true,
     isBestSeller: true,
+    isRentable: true,
+    rentalPrice: 110000,
+    rentalDeposit: 250000,
+    occasions: ['chup-anh', 'hen-ho'],
+    stylistTip: 'Set đồ phong cách preppy Hàn Quốc, đi cùng boots cổ lửng hoặc giày Mary Jane.',
   },
   {
     id: 'prod-w-04',
@@ -79,6 +210,11 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewCount: 19,
     isNew: true,
+    isRentable: true,
+    rentalPrice: 95000,
+    rentalDeposit: 220000,
+    occasions: ['cong-so', 'hen-ho'],
+    stylistTip: 'Sơ vin vạt trước hoặc khoác ngoài áo hai dây tạo hiệu ứng thị giác thon gọn phần hông.',
   },
   {
     id: 'prod-w-05',
@@ -98,6 +234,11 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 31,
     isNew: true,
+    isRentable: true,
+    rentalPrice: 100000,
+    rentalDeposit: 240000,
+    occasions: ['hen-ho', 'cong-so', 'chup-anh'],
+    stylistTip: 'Cổ tim giúp thanh thoát phần cổ và cằm nọng, dễ phối với chân váy chữ A xòe nhẹ.',
   },
   {
     id: 'prod-w-06',
@@ -117,6 +258,10 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewCount: 52,
     isBestSeller: true,
+    isRentable: false,
+    rentalPrice: 0,
+    rentalDeposit: 0,
+    occasions: ['hen-ho'],
   },
   {
     id: 'prod-w-07',
@@ -136,6 +281,11 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewCount: 22,
     isNew: true,
+    isRentable: true,
+    rentalPrice: 90000,
+    rentalDeposit: 200000,
+    occasions: ['cong-so', 'dam-cuoi'],
+    stylistTip: 'Chất liệu rủ mềm che khuyết điểm ngực lớn và mỡ lưng cực kỳ tinh tế.',
   },
   {
     id: 'prod-w-08',
@@ -155,6 +305,10 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewCount: 64,
     isBestSeller: true,
+    isRentable: true,
+    rentalPrice: 95000,
+    rentalDeposit: 220000,
+    occasions: ['hen-ho', 'chup-anh'],
   },
   {
     id: 'prod-w-09',
@@ -174,6 +328,10 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 18,
     isNew: true,
+    isRentable: true,
+    rentalPrice: 95000,
+    rentalDeposit: 220000,
+    occasions: ['cong-so', 'hen-ho'],
   },
   {
     id: 'prod-w-10',
@@ -193,9 +351,14 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewCount: 41,
     isBestSeller: true,
+    isRentable: true,
+    rentalPrice: 90000,
+    rentalDeposit: 200000,
+    occasions: ['chup-anh', 'hen-ho'],
+    stylistTip: 'Lên hình sống ảo cực thơ, rất thích hợp chụp ảnh dã ngoại hoặc đi biển.',
   },
 
-  // === BỘ SƯU TẬP NAM (8 SẢN PHẨM TỪ ẢNH THẬT) ===
+  // === BỘ SƯU TẬP NAM ===
   {
     id: 'prod-m-01',
     name: 'Áo Thun Bigsize Nam Cổ Tròn DANISE In Typography Đỏ Rượu',
@@ -215,6 +378,10 @@ export const PRODUCTS: Product[] = [
     reviewCount: 57,
     isNew: true,
     isBestSeller: true,
+    isRentable: false,
+    rentalPrice: 0,
+    rentalDeposit: 0,
+    occasions: ['hen-ho', 'chup-anh'],
   },
   {
     id: 'prod-m-02',
@@ -234,6 +401,11 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 42,
     isNew: true,
+    isRentable: true,
+    rentalPrice: 110000,
+    rentalDeposit: 250000,
+    occasions: ['cong-so', 'dam-cuoi', 'tiec-tung'],
+    stylistTip: 'Phối cùng quần âu đen và thắt lưng da bò tạo phom người vững chãi, gọn gàng.',
   },
   {
     id: 'prod-m-03',
@@ -254,6 +426,10 @@ export const PRODUCTS: Product[] = [
     reviewCount: 88,
     isNew: true,
     isBestSeller: true,
+    isRentable: true,
+    rentalPrice: 95000,
+    rentalDeposit: 220000,
+    occasions: ['hen-ho', 'cong-so'],
   },
   {
     id: 'prod-m-04',
@@ -273,6 +449,10 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewCount: 34,
     isNew: true,
+    isRentable: true,
+    rentalPrice: 100000,
+    rentalDeposit: 230000,
+    occasions: ['chup-anh', 'tiec-tung'],
   },
   {
     id: 'prod-m-05',
@@ -292,6 +472,11 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewCount: 63,
     isBestSeller: true,
+    isRentable: true,
+    rentalPrice: 130000,
+    rentalDeposit: 300000,
+    occasions: ['tiec-tung', 'dam-cuoi', 'cong-so'],
+    stylistTip: 'Gam xanh navy đậm giúp thu gọn vòng eo thị giác, cực kỳ tôn da nam giới châu Á.',
   },
   {
     id: 'prod-m-06',
@@ -311,6 +496,10 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 47,
     isNew: true,
+    isRentable: false,
+    rentalPrice: 0,
+    rentalDeposit: 0,
+    occasions: ['hen-ho'],
   },
   {
     id: 'prod-m-07',
@@ -330,6 +519,10 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewCount: 71,
     isBestSeller: true,
+    isRentable: true,
+    rentalPrice: 120000,
+    rentalDeposit: 300000,
+    occasions: ['hen-ho', 'cong-so', 'chup-anh'],
   },
   {
     id: 'prod-m-08',
@@ -349,6 +542,10 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewCount: 29,
     isNew: true,
+    isRentable: false,
+    rentalPrice: 0,
+    rentalDeposit: 0,
+    occasions: ['hen-ho'],
   },
 ];
 
@@ -358,7 +555,7 @@ const getCategoryCount = (slug: string) => {
 };
 
 export const CATEGORIES: Category[] = [
-  // 1. NỮ (Tính chính xác theo số lượng sản phẩm thật)
+  // 1. NỮ
   {
     id: 'c-w-1',
     name: 'Váy',
@@ -405,7 +602,7 @@ export const CATEGORIES: Category[] = [
     itemCount: getCategoryCount('set-do-nu'),
   },
 
-  // 2. NAM (Tính chính xác theo số lượng sản phẩm thật)
+  // 2. NAM
   {
     id: 'c-m-1',
     name: 'Áo Polo',
@@ -470,7 +667,7 @@ export const REVIEWS: CustomerReview[] = [
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80',
     productName: 'Set Bộ Áo Cổ Sen Phối Chân Váy Xếp Ly 24YBD53',
     rating: 5,
-    comment: 'Set này che bụng cực tốt luôn ạ, chất vải đẹp dày dặn, mặc lên xinh xắn tự tin hẳn. Shop tư vấn size rất chuẩn!',
+    comment: 'Set này che bụng cực tốt luôn ạ. Mình thuê đi ăn cưới 3 ngày thủ tục nhanh gọn, cọc trả lại đúng hẹn, váy thơm tho như mới!',
     date: '25/10/2026',
     verified: true,
   },

@@ -3,10 +3,11 @@ import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import CartDrawer from '@/components/CartDrawer';
 import ProductDetailModal from '@/components/ProductDetailModal';
+import MakeupBookingModal from '@/components/MakeupBookingModal';
 
 export const metadata: Metadata = {
-  title: 'PLUXXL - Thời Trang Bigsize Nam & Nữ',
-  description: 'Trang mua sắm quần áo thời trang nam và nữ. Đa dạng mẫu mã áo polo, sơ mi, đầm váy, quần âu.',
+  title: 'PLUXXL - Thời Trang Bigsize & Cho Thuê Đồ Dự Tiệc, Đặt Lịch Make Up',
+  description: 'Trang mua sắm và cho thuê đồ thời trang bigsize nam nữ. Đầy đủ gói đặt lịch make up chuyên nghiệp, gợi ý chọn đồ theo dịp.',
 };
 
 export default function RootLayout({
@@ -21,6 +22,7 @@ export default function RootLayout({
           {children}
           <CartDrawer />
           <ProductDetailModal />
+          <MakeupBookingModal />
         </CartProvider>
       </body>
     </html>

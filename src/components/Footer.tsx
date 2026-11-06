@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { MapPin, Phone, Mail, ShieldCheck } from 'lucide-react';
+import { MapPin, Phone, Mail, ShieldCheck, Sparkles } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -17,45 +17,47 @@ export default function Footer() {
             <div className="flex items-start gap-2 text-neutral-300 leading-relaxed">
               <MapPin className="w-4 h-4 text-[#e5677d] shrink-0 mt-0.5" />
               <div>
-                <p className="font-bold text-white mb-1">Hệ thống cửa hàng:</p>
+                <p className="font-bold text-white mb-1">Hệ thống showroom & Studio Make up:</p>
                 <ul className="space-y-1 text-neutral-400 text-[11px]">
-                  <li>• <strong>CS1:</strong> 0911 544 468 - Số 83 Nguyễn Hy Quang, Đống Đa, Hà Nội</li>
-                  <li>• <strong>CS2:</strong> 0962 046 608 - Số 48A Dịch Vọng Hậu, Cầu Giấy, Hà Nội</li>
-                  <li>• <strong>CS3:</strong> 0383 544 468 - Số 338 Nguyễn Trãi, Hà Đông, Hà Nội</li>
-                  <li>• <strong>CS4:</strong> 0396 736 028 - Số 24 Tuệ Tĩnh, Hai Bà Trưng, Hà Nội</li>
-                  <li>• <strong>CS5:</strong> 0396 736 028 - Số 177 Quang Trung, Gò Vấp, TP.HCM</li>
+                  <li>• <strong>Studio CS1:</strong> 0911 544 468 - Số 83 Nguyễn Hy Quang, Đống Đa, Hà Nội</li>
+                  <li>• <strong>Studio CS2:</strong> 0962 046 608 - Số 48A Dịch Vọng Hậu, Cầu Giấy, Hà Nội</li>
+                  <li>• <strong>Showroom CS3:</strong> 0383 544 468 - Số 338 Nguyễn Trãi, Hà Đông, Hà Nội</li>
+                  <li>• <strong>Showroom CS4:</strong> 0396 736 028 - Số 177 Quang Trung, Gò Vấp, TP.HCM</li>
                 </ul>
               </div>
             </div>
 
             <div className="flex items-center gap-2 text-neutral-300">
               <Phone className="w-4 h-4 text-[#e5677d] shrink-0" />
-              <span>Số điện thoại: <a href="tel:0963511933" className="text-white font-bold hover:underline">0963 511 933</a></span>
+              <span>Hotline & Zalo: <a href="tel:0963511933" className="text-white font-bold hover:underline">0963 511 933</a></span>
             </div>
 
             <div className="flex items-center gap-2 text-neutral-300">
               <Mail className="w-4 h-4 text-[#e5677d] shrink-0" />
-              <span>Email: <a href="mailto:bubigsizeyoung@gmail.com" className="text-white hover:underline">bubigsizeyoung@gmail.com</a></span>
+              <span>Email: <a href="mailto:contact@pluxxl.vn" className="text-white hover:underline">contact@pluxxl.vn</a></span>
             </div>
           </div>
 
-          {/* COL 2: HỖ TRỢ KHÁCH HÀNG (span 2) */}
+          {/* COL 2: DỊCH VỤ NỔI BẬT (span 2) */}
           <div className="lg:col-span-2 space-y-3">
             <h4 className="font-bold text-sm text-white uppercase tracking-wider">
-              HỖ TRỢ KHÁCH HÀNG
+              DỊCH VỤ CỦA CHÚNG TÔI
             </h4>
             <ul className="space-y-2 text-neutral-400">
               <li>
-                <Link href="/" className="hover:text-white transition-colors">Tìm kiếm sản phẩm</Link>
+                <Link href="#occasion-section" className="hover:text-white transition-colors flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 text-[#e5677d]" />
+                  <span>Thuê đồ dự tiệc</span>
+                </Link>
               </li>
               <li>
-                <Link href="/" className="hover:text-white transition-colors">Chính sách bảo mật</Link>
+                <span className="hover:text-white transition-colors cursor-pointer">Make Up tiệc & sự kiện</span>
               </li>
               <li>
-                <Link href="/" className="hover:text-white transition-colors">Điều khoản dịch vụ</Link>
+                <span className="hover:text-white transition-colors cursor-pointer">Make Up cô dâu & ăn hỏi</span>
               </li>
               <li>
-                <Link href="/" className="hover:text-white transition-colors">Hướng dẫn thanh toán</Link>
+                <span className="hover:text-white transition-colors cursor-pointer">Stylist tư vấn phối đồ</span>
               </li>
             </ul>
           </div>
@@ -63,17 +65,17 @@ export default function Footer() {
           {/* COL 3: CHÍNH SÁCH (span 2) */}
           <div className="lg:col-span-2 space-y-3">
             <h4 className="font-bold text-sm text-white uppercase tracking-wider">
-              CHÍNH SÁCH
+              CHÍNH SÁCH & CAM KẾT
             </h4>
             <ul className="space-y-2 text-neutral-400">
               <li>
-                <Link href="/" className="hover:text-white transition-colors">Sản phẩm khuyến mãi</Link>
+                <span className="hover:text-white transition-colors">Quy trình thuê & hoàn cọc</span>
               </li>
               <li>
-                <Link href="/" className="hover:text-white transition-colors">Chính sách đổi hàng 7 ngày</Link>
+                <span className="hover:text-white transition-colors">Chính sách đổi size 7 ngày</span>
               </li>
               <li>
-                <Link href="/" className="hover:text-white transition-colors">Chính sách giao nhận & kiểm hàng</Link>
+                <span className="hover:text-white transition-colors">Giao nhận 2 chiều toàn quốc</span>
               </li>
               <li>
                 <Link href="/admin" className="hover:text-[#e5677d] transition-colors font-bold flex items-center gap-1">
@@ -91,7 +93,7 @@ export default function Footer() {
             </h4>
             
             <p className="text-neutral-400 text-[11px] leading-relaxed">
-              Đăng ký để nhận thông tin bộ sưu tập mới nhất và ưu đãi đặc quyền:
+              Nhận voucher 50.000₫ cho đơn thuê hoặc mua đồ đầu tiên:
             </p>
 
             <div className="flex gap-1.5">
@@ -105,7 +107,7 @@ export default function Footer() {
               </button>
             </div>
 
-            {/* TRUST BADGE FROM BUBIGSIZE */}
+            {/* TRUST BADGE */}
             <div className="pt-2">
               <img
                 src="https://theme.hstatic.net/200001016175/1001381733/14/footer_trustbadge.png?v=44"
@@ -120,8 +122,8 @@ export default function Footer() {
 
         {/* BOTTOM COPYRIGHT */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-neutral-500 gap-2">
-          <p>© Bản quyền thuộc về PLUXXL | Cung cấp bởi PLUXXL Platform</p>
-          <p>Thương hiệu thời trang nam & nữ ngoại cỡ hàng đầu</p>
+          <p>© Bản quyền thuộc về PLUXXL | Bigsize Fashion, Rental & Make Up Platform</p>
+          <p>Thương hiệu thời trang & dịch vụ làm đẹp ngoại cỡ hàng đầu</p>
         </div>
 
       </div>

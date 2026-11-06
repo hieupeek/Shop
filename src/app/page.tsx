@@ -4,6 +4,7 @@ import React, { useState, useMemo } from 'react';
 import Header from '@/components/Header';
 import HeroBanner from '@/components/HeroBanner';
 import PoliciesBar from '@/components/PoliciesBar';
+import OccasionOutfitsSection from '@/components/OccasionOutfitsSection';
 import SeasonCollectionSection from '@/components/SeasonCollectionSection';
 import ProductCard from '@/components/ProductCard';
 import ReviewSection from '@/components/ReviewSection';
@@ -13,37 +14,43 @@ import { useCart } from '@/context/CartContext';
 import { 
   Filter, 
   ArrowUpDown, 
-  ShoppingBag
+  ShoppingBag,
+  Sparkles,
+  CalendarHeart
 } from 'lucide-react';
 
 export default function HomePage() {
-  const { setIsCartOpen, totalCount } = useCart();
-  const [activeGenderTab, setActiveGenderTab] = useState<'ALL' | 'WOMEN' | 'MEN'>('ALL');
-  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const { setIsCartOpen, totalCount, openMakeupModal } = useCart();
+  const [activeGenderTab, setActiveGenderTab] = useState<'WOMEN' | 'MEN'>('WOMEN');
+  const [selectedCategory, setSelectedCategory] = useState<string>('dam-vay');
   const [selectedSizeFilter, setSelectedSizeFilter] = useState<string>('ALL');
   const [sortBy, setSortBy] = useState<'POPULAR' | 'PRICE_ASC' | 'PRICE_DESC' | 'NEW'>('POPULAR');
 
-  // Filter categories by selected gender & calculate EXACT product count from PRODUCTS array
-  const filteredCategories = useMemo(() => {
-    const list = activeGenderTab === 'ALL' 
-      ? CATEGORIES 
-      : CATEGORIES.filter((c) => c.gender === activeGenderTab);
+  // Cập nhật selectedCategory tương ứng khi chuyển đổi Nam / Nữ
+  const handleGenderTabChange = (newTab: 'WOMEN' | 'MEN') => {
+    setActiveGenderTab(newTab);
+    if (newTab === 'WOMEN') {
+      setSelectedCategory('dam-vay');
+    } else {
+      setSelectedCategory('ao-polo-nam');
+    }
+    setSelectedSizeFilter('ALL');
+  };
 
+  // Filter categories by selected gender & calculate count
+  const filteredCategories = useMemo(() => {
+    const list = CATEGORIES.filter((c) => c.gender === activeGenderTab);
     return list.map((c) => ({
       ...c,
       itemCount: PRODUCTS.filter((p) => p.categorySlug === c.slug).length,
     }));
   }, [activeGenderTab]);
 
-  // Filter and sort products
+  // Filter and sort products by category, gender & size
   const filteredProducts = useMemo(() => {
-    let result = [...PRODUCTS];
+    let result = PRODUCTS.filter((p) => p.gender === activeGenderTab || p.gender === 'UNISEX');
 
-    if (activeGenderTab !== 'ALL') {
-      result = result.filter((p) => p.gender === activeGenderTab || p.gender === 'UNISEX');
-    }
-
-    if (selectedCategory !== 'ALL') {
+    if (selectedCategory) {
       result = result.filter((p) => p.categorySlug === selectedCategory);
     }
 
@@ -67,52 +74,54 @@ export default function HomePage() {
   }, [activeGenderTab, selectedCategory, selectedSizeFilter, sortBy]);
 
   const allAvailableSizes = ['ALL', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
+  const currentCategoryObj = CATEGORIES.find((c) => c.slug === selectedCategory);
+
+  const scrollToOccasion = () => {
+    const el = document.getElementById('occasion-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* 1. HEADER */}
-      <Header activeTab={activeGenderTab} setActiveTab={setActiveGenderTab} />
+      {/* 1. HEADER (Đã bỏ tab Tất Cả Sản Phẩm) */}
+      <Header activeTab={activeGenderTab} setActiveTab={handleGenderTabChange} />
 
-      {/* 2. BACKGROUND ĐẦU (HERO SLIDER BANNER GIỐNG BUBIGSIZE) */}
+      {/* 2. BANNER CHÍNH & DỊCH VỤ MỚI */}
       <HeroBanner 
         activeTab={activeGenderTab} 
-        setActiveTab={setActiveGenderTab} 
+        setActiveTab={handleGenderTabChange} 
       />
 
-      {/* 3. CÁC CAM KẾT (POLICIES BAR CHUẨN BUBIGSIZE) */}
+      {/* 3. CAM KẾT CHẤT LƯỢNG, CHO THUÊ VÀ MAKE UP */}
       <PoliciesBar />
 
-      {/* 4. LỰA CHỌN ĐẦM VÁY, ÁO, CHÂN VÁY, QUẦN,... (SEASON COLLECTIONS) */}
+      {/* 4. GỢI Ý CHỌN ĐỒ THEO DỊP & DỊCH VỤ CHO THUÊ (TIỆC, CƯỚI, KỶ YẾU, CÔNG SỞ, HẸN HÒ) */}
+      <OccasionOutfitsSection />
+
+      {/* 5. DANH MỤC PHÂN LOẠI ĐỒ NỮ & ĐỒ NAM */}
       <SeasonCollectionSection
         categories={filteredCategories}
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
         activeGenderTab={activeGenderTab}
-        setActiveGenderTab={setActiveGenderTab}
+        setActiveGenderTab={handleGenderTabChange}
       />
 
-      {/* 5. DANH SÁCH SẢN PHẨM & BỘ LỌC */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1">
+      {/* 6. DANH SÁCH SẢN PHẨM THEO DANH MỤC ĐƯỢC CHỌN (ĐÃ LOẠI BỎ 'TẤT CẢ SẢN PHẨM') */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 w-full">
         
         {/* Filter bar */}
-        <div className="bg-white p-4 rounded-2xl border border-neutral-200 shadow-xs mb-8 space-y-4">
+        <div className="bg-white p-4 sm:p-5 rounded-2xl border border-neutral-200 shadow-xs mb-8 space-y-4">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             
-            {/* Active category pill */}
+            {/* Active category Title */}
             <div className="flex items-center gap-2">
               <span className="text-sm font-black text-neutral-900 uppercase">
-                {selectedCategory === 'ALL' ? 'TẤT CẢ SẢN PHẨM' : `DANH MỤC: ${CATEGORIES.find(c => c.slug === selectedCategory)?.name || selectedCategory}`}
+                DANH MỤC: {currentCategoryObj?.name || 'Sản phẩm nổi bật'} ({activeGenderTab === 'WOMEN' ? 'ĐỒ NỮ' : 'ĐỒ NAM'})
               </span>
-              <span className="text-xs text-neutral-400">({filteredProducts.length} sản phẩm)</span>
-              
-              {selectedCategory !== 'ALL' && (
-                <button
-                  onClick={() => setSelectedCategory('ALL')}
-                  className="ml-2 text-xs font-bold text-[#e5677d] underline hover:text-black cursor-pointer"
-                >
-                  Bỏ lọc danh mục
-                </button>
-              )}
+              <span className="text-xs text-neutral-400">({filteredProducts.length} mẫu)</span>
             </div>
 
             {/* Sort */}
@@ -139,7 +148,7 @@ export default function HomePage() {
           <div className="pt-2 border-t border-neutral-100 flex flex-wrap items-center gap-2">
             <span className="text-xs font-semibold text-neutral-500 flex items-center gap-1 mr-2">
               <Filter className="w-3.5 h-3.5" />
-              Chọn Size:
+              Lọc theo Size cân nặng:
             </span>
             {allAvailableSizes.map((size) => (
               <button
@@ -151,7 +160,7 @@ export default function HomePage() {
                     : 'bg-neutral-50 text-neutral-700 border-neutral-200 hover:border-neutral-400'
                 }`}
               >
-                {size === 'ALL' ? 'Tất cả' : size}
+                {size === 'ALL' ? 'Tất cả size' : size}
               </button>
             ))}
           </div>
@@ -160,16 +169,12 @@ export default function HomePage() {
         {/* PRODUCTS GRID */}
         {filteredProducts.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-3xl border border-dashed border-neutral-300 p-8">
-            <p className="text-sm font-bold text-neutral-700">Không có sản phẩm nào phù hợp với bộ lọc</p>
+            <p className="text-sm font-bold text-neutral-700">Chưa có sản phẩm nào phù hợp với bộ lọc size đã chọn</p>
             <button
-              onClick={() => {
-                setSelectedCategory('ALL');
-                setSelectedSizeFilter('ALL');
-                setActiveGenderTab('ALL');
-              }}
+              onClick={() => setSelectedSizeFilter('ALL')}
               className="mt-3 px-4 py-2 bg-black text-white text-xs font-bold rounded-xl cursor-pointer"
             >
-              Xem lại tất cả
+              Bỏ lọc size
             </button>
           </div>
         ) : (
@@ -182,26 +187,26 @@ export default function HomePage() {
 
       </section>
 
-      {/* 6. REVIEWS */}
+      {/* 7. ĐÁNH GIÁ THỰC TẾ CỦA KHÁCH MUA & THUÊ */}
       <ReviewSection />
 
-      {/* 7. PHẦN FOOTER CHUẨN BUBIGSIZE */}
+      {/* 8. FOOTER */}
       <Footer />
 
-      {/* 8. MOBILE BOTTOM BAR */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-neutral-200 px-4 py-2 flex items-center justify-around shadow-lg">
+      {/* 9. MOBILE BOTTOM NAVIGATION BAR */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-neutral-200 px-3 py-2 flex items-center justify-around shadow-lg">
         <button
-          onClick={() => setActiveGenderTab('ALL')}
+          onClick={() => handleGenderTabChange('WOMEN')}
           className={`flex flex-col items-center gap-0.5 text-[10px] font-bold ${
-            activeGenderTab === 'ALL' ? 'text-black' : 'text-neutral-500'
+            activeGenderTab === 'WOMEN' ? 'text-[#e5677d]' : 'text-neutral-500'
           }`}
         >
-          <span className="text-base">🏠</span>
-          <span>Trang chủ</span>
+          <span className="text-base">👗</span>
+          <span>Đồ nữ</span>
         </button>
 
         <button
-          onClick={() => setActiveGenderTab('MEN')}
+          onClick={() => handleGenderTabChange('MEN')}
           className={`flex flex-col items-center gap-0.5 text-[10px] font-bold ${
             activeGenderTab === 'MEN' ? 'text-black' : 'text-neutral-500'
           }`}
@@ -211,13 +216,19 @@ export default function HomePage() {
         </button>
 
         <button
-          onClick={() => setActiveGenderTab('WOMEN')}
-          className={`flex flex-col items-center gap-0.5 text-[10px] font-bold ${
-            activeGenderTab === 'WOMEN' ? 'text-black' : 'text-neutral-500'
-          }`}
+          onClick={scrollToOccasion}
+          className="flex flex-col items-center gap-0.5 text-[10px] font-bold text-neutral-600 hover:text-[#e5677d]"
         >
-          <span className="text-base">👗</span>
-          <span>Đồ nữ</span>
+          <Sparkles className="w-4 h-4 text-[#e5677d]" />
+          <span>Theo dịp</span>
+        </button>
+
+        <button
+          onClick={() => openMakeupModal()}
+          className="flex flex-col items-center gap-0.5 text-[10px] font-bold text-neutral-600 hover:text-[#e5677d]"
+        >
+          <CalendarHeart className="w-4 h-4 text-[#e5677d]" />
+          <span>Make Up</span>
         </button>
 
         <button

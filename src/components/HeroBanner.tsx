@@ -1,29 +1,30 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, ShieldCheck, Sparkles, CalendarHeart } from 'lucide-react';
+import { useCart } from '@/context/CartContext';
 
 type HeroBannerProps = {
-  activeTab: 'ALL' | 'WOMEN' | 'MEN';
-  setActiveTab: (tab: 'ALL' | 'WOMEN' | 'MEN') => void;
+  activeTab: 'WOMEN' | 'MEN';
+  setActiveTab: (tab: 'WOMEN' | 'MEN') => void;
 };
 
 const SLIDES = [
   {
     id: 1,
-    tag: 'PLUXXL COLLECTION 2026',
-    title: 'BỘ SƯU TẬP NGOẠI CỠ 2026',
-    subtitle: 'Thiết kế phom chuẩn cho người từ 65kg đến 130kg. Tôn dáng tự tin, thoải mái vận động cả ngày.',
-    primaryImage: '/images/products/men_polo_raglan_sage.webp',
-    secondaryImage: '/images/products/women_set_pleated_gray.webp',
-    gender: 'ALL' as const,
-    highlights: ['Phom suông che khuyết điểm bụng', 'Vải thoáng khí, co giãn 4 chiều', 'Đủ size từ L đến 5XL'],
+    tag: 'DỊCH VỤ THỜI TRANG MỚI 2026',
+    title: 'CHO THUÊ ĐỒ DỰ TIỆC & BÁN BIGSIZE',
+    subtitle: 'Tự tin toả sáng trong mọi dịp quan trọng: Ăn cưới, dạ hội, kỷ yếu, công sở. Hỗ trợ Thuê 3 - 5 ngày tiết kiệm 70% hoặc Mua đứt.',
+    primaryImage: '/images/products/women_set_pleated_gray.webp',
+    secondaryImage: '/images/products/men_shirt_navy_formal.webp',
+    gender: 'WOMEN' as const,
+    highlights: ['Cho thuê từ 90k/lượt 3 ngày', 'Giặt hấp thơm tho, hoàn cọc 100%', 'Gói Makeup đi tiệc giảm 15%'],
   },
   {
     id: 2,
-    tag: 'BST THỜI TRANG NỮ',
-    title: 'THỜI TRANG NỮ THANH LỊCH',
-    subtitle: 'Set bộ công sở, áo sơ mi kẻ, chân váy xếp ly và áo croptop che khuyết điểm tôn trọn nét duyên.',
+    tag: 'BST THỜI TRANG NỮ BIGSIZE',
+    title: 'ĐẦM VÁY & SET BỘ TÔN DÁNG',
+    subtitle: 'Thiết kế phom chuẩn cho nàng từ 55kg đến 105kg. Chiết eo giấu bụng, chất liệu mềm rủ tự nhiên.',
     primaryImage: '/images/products/women_set_pleated_gray.webp',
     secondaryImage: '/images/products/women_top_croptop_jeans.webp',
     gender: 'WOMEN' as const,
@@ -31,9 +32,9 @@ const SLIDES = [
   },
   {
     id: 3,
-    tag: 'BST THỜI TRANG NAM',
-    title: 'THỜI TRANG NAM LỊCH LÃM',
-    subtitle: 'Polo raglan thể thao, sơ mi modal chống nhăn và quần âu cạp chun ẩn nam tính, phong độ.',
+    tag: 'BST THỜI TRANG NAM BIGSIZE',
+    title: 'SƠ MI & POLO NAM LỊCH LÃM',
+    subtitle: 'Polo raglan thể thao, sơ mi modal chống nhăn và quần âu cạp chun ẩn nam tính cho chàng từ 70kg đến 140kg.',
     primaryImage: '/images/products/men_shirt_blue_pattern.webp',
     secondaryImage: '/images/products/men_tshirt_danise_red.webp',
     gender: 'MEN' as const,
@@ -43,6 +44,7 @@ const SLIDES = [
 
 export default function HeroBanner({ activeTab, setActiveTab }: HeroBannerProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { openMakeupModal } = useCart();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -53,6 +55,13 @@ export default function HeroBanner({ activeTab, setActiveTab }: HeroBannerProps)
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
   const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
+
+  const scrollToOccasion = () => {
+    const el = document.getElementById('occasion-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="relative w-full overflow-hidden bg-[#0a0a0c] group">
@@ -66,7 +75,7 @@ export default function HeroBanner({ activeTab, setActiveTab }: HeroBannerProps)
             key={slide.id} 
             className="w-full shrink-0 relative min-h-[460px] sm:min-h-[520px] lg:min-h-[560px] flex items-center overflow-hidden"
           >
-            {/* 1. NỀN AMBIENT BLUR NGHỆ THUẬT PHÍA SAU (Ánh sáng đồng điệu theo ảnh sản phẩm) */}
+            {/* 1. NỀN AMBIENT BLUR NGHỆ THUẬT PHÍA SAU */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden">
               <img
                 src={slide.primaryImage}
@@ -77,10 +86,10 @@ export default function HeroBanner({ activeTab, setActiveTab }: HeroBannerProps)
               <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0c] via-[#0a0a0c]/90 to-[#0a0a0c]/60" />
             </div>
 
-            {/* 2. KHU VỰC HIỂN THỊ CHÍNH (GRID 2 CỘT SANG TRỌNG) */}
+            {/* 2. KHU VỰC HIỂN THỊ CHÍNH */}
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center z-10">
               
-              {/* CỘT TRÁI: TIÊU ĐỀ & NỘI DUNG (span 7) */}
+              {/* CỘT TRÁI: TIÊU ĐỀ & NỘI DUNG */}
               <div className="lg:col-span-7 space-y-4 text-white text-center lg:text-left">
                 {/* Badge Tag */}
                 <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/15 text-[11px] font-bold uppercase tracking-wider text-white">
@@ -111,46 +120,59 @@ export default function HeroBanner({ activeTab, setActiveTab }: HeroBannerProps)
                 {/* Action Buttons */}
                 <div className="pt-4 flex flex-wrap justify-center lg:justify-start gap-3">
                   <button
-                    onClick={() => setActiveTab('MEN')}
-                    className={`px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer shadow-md ${
-                      activeTab === 'MEN'
-                        ? 'bg-white text-black'
-                        : 'bg-white/10 hover:bg-white text-white hover:text-black border border-white/20'
-                    }`}
+                    onClick={scrollToOccasion}
+                    className="px-5 py-3 rounded-xl font-black text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer shadow-lg bg-[#e5677d] hover:bg-[#d4566c] text-white"
                   >
-                    <span>Quần áo nam</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <Sparkles className="w-4 h-4" />
+                    <span>Gợi ý theo dịp & Thuê đồ</span>
+                  </button>
+
+                  <button
+                    onClick={() => openMakeupModal()}
+                    className="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer bg-white/10 hover:bg-white text-white hover:text-black border border-white/20"
+                  >
+                    <CalendarHeart className="w-4 h-4 text-[#e5677d]" />
+                    <span>Đặt lịch Make Up</span>
                   </button>
 
                   <button
                     onClick={() => setActiveTab('WOMEN')}
-                    className={`px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 cursor-pointer shadow-md ${
+                    className={`px-4 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer ${
                       activeTab === 'WOMEN'
-                        ? 'bg-[#e5677d] text-white shadow-lg shadow-pink-500/30'
-                        : 'bg-white/10 hover:bg-[#e5677d] text-white border border-white/20'
+                        ? 'bg-white text-black'
+                        : 'bg-white/5 hover:bg-white/15 text-neutral-300 border border-white/10'
                     }`}
                   >
-                    <span>Quần áo nữ</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <span>Đồ nữ</span>
+                  </button>
+
+                  <button
+                    onClick={() => setActiveTab('MEN')}
+                    className={`px-4 py-3 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer ${
+                      activeTab === 'MEN'
+                        ? 'bg-white text-black'
+                        : 'bg-white/5 hover:bg-white/15 text-neutral-300 border border-white/10'
+                    }`}
+                  >
+                    <span>Đồ nam</span>
                   </button>
                 </div>
               </div>
 
-              {/* CỘT PHẢI: ẢNH NGƯỜI MẪU TRỌN VẸN (span 5) - THẤY RÕ TỪ ĐẦU ĐẾN CHÂN */}
+              {/* CỘT PHẢI: ẢNH NGƯỜI MẪU */}
               <div className="lg:col-span-5 flex justify-center lg:justify-end items-center gap-3 sm:gap-4">
                 
-                {/* Ảnh chính: Người mẫu chuẩn form, căn từ đỉnh đầu (object-top) */}
+                {/* Ảnh chính */}
                 <div className="relative w-44 sm:w-56 lg:w-60 h-[320px] sm:h-[400px] lg:h-[450px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/15 bg-neutral-900 group-hover:scale-[1.02] transition-transform duration-500">
                   <img
                     src={slide.primaryImage}
                     alt={slide.title}
                     className="w-full h-full object-cover object-top"
                   />
-                  {/* Subtle inner shadow bottom */}
                   <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
                 </div>
 
-                {/* Ảnh phụ cạnh bên: Tạo bố cục tạp chí thời trang phong phú */}
+                {/* Ảnh phụ cạnh bên */}
                 <div className="hidden sm:block relative w-36 sm:w-44 lg:w-48 h-[270px] sm:h-[340px] lg:h-[380px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-white/10 bg-neutral-900 opacity-90 hover:opacity-100 transition-opacity">
                   <img
                     src={slide.secondaryImage}
